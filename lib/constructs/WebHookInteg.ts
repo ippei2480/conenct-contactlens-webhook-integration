@@ -27,8 +27,11 @@ export class WebHookInteg extends Construct {
     fncRole.addToPolicy(
       new iam.PolicyStatement({
         effect: iam.Effect.ALLOW,
-        actions: ["s3:ListBucket", "s3:ListObject", "s3:GetObject"],
-        resources: [`*`],
+        actions: ["s3:ListBucket", "s3:GetObject"],
+        resources: [
+          `arn:aws:s3:::${props.connectAnalysisBucketName}`,
+          `arn:aws:s3:::${props.connectAnalysisBucketName}/*`,
+        ],
       })
     );
 
